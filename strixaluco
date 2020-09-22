@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+# Copyright © 2020 Jakub Wilk <jwilk@jwilk.net>
+# SPDX-License-Identifier: MIT
+
+set -e -u
+
+url="$1"
+user_agent='Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:68.0) Gecko/20100101 Firefox/68.0'
+tmpfile=$(mktemp -t strixaluco.XXXXXX)
+curl --silent --fail --show-error --user-agent "$user_agent" "$url" > "$tmpfile"
+title=$(hxextract .desc-o-mb-title "$tmpfile")
+title=$(hxselect -c span <<< "$title")
+rest=$(hxextract .desc-o-b-rest "$tmpfile")
+rest=$(hxselect -c span <<< "$rest")
+rest=${rest#/ }
+printf '"%s" %s\n' "$title" "$rest"
+printf '%s\n' "$url"
+rm -f "$tmpfile"
+
+# vim:ts=4 sts=4 sw=4 et
