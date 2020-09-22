@@ -1,0 +1,10 @@
+.. code:: console
+
+   $ strixaluco 'https://www.warszawa-ochota.sowa.pl/sowacgi.php?KatID=0&typ=record&001=oc2017001119' 'https://www.warszawa-ochota.sowa.pl/sowacgi.php?KatID=0&typ=record&001=19950509/000-12417'
+   "Pieśń o Sowie" Jarosław Górski ; ilustrowała Joanna Rusinek.
+   https://www.warszawa-ochota.sowa.pl/sowacgi.php?KatID=0&typ=record&001=oc2017001119
+
+   "Ptaki drapieżne i sowy" Detlef Singer ; tł. [z niem.] Grzegorz Jednoralski.
+   https://www.warszawa-ochota.sowa.pl/sowacgi.php?KatID=0&typ=record&001=19950509/000-12417
+
+.. vim:ft=rst ts=3 sts=3 sw=3 et
