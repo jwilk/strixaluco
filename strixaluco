@@ -10,7 +10,7 @@ tmpfile=$(mktemp -t strixaluco.XXXXXX)
 sep=''
 for url in "$@"
 do
-    curl --silent --fail --show-error --user-agent "$user_agent" "$url" > "$tmpfile"
+    curl --silent --fail --show-error --location --user-agent "$user_agent" "$url" > "$tmpfile"
     title=$(hxextract .desc-o-mb-title "$tmpfile")
     title=$(hxselect -c span <<< "$title")
     rest=$(hxextract .desc-o-b-rest "$tmpfile")
