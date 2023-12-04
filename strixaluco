@@ -6,6 +6,13 @@
 set -e -u
 shopt -s extglob
 
+normspace()
+{
+    local s
+    s=$(set -f; printf '%s ' $*)
+    printf '%s' "${s% }"
+}
+
 user_agent='Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0'
 tmpfile=$(mktemp -t strixaluco.XXXXXX)
 sep=''
@@ -14,14 +21,10 @@ do
     curl --silent --fail --show-error --location --user-agent "$user_agent" "$url" > "$tmpfile"
     title=$(hxextract .desc-o-mb-title "$tmpfile")
     title=$(hxselect -c span <<< "$title")
-    title=${title//+([[:space:]])/ }
-    title=${title# }
-    title=${title% }
+    title=$(normspace "$title")
     rest=$(hxextract .desc-o-b-rest "$tmpfile")
     rest=$(hxselect -c span <<< "$rest")
-    rest=${rest//+([[:space:]])/ }
-    rest=${rest# }
-    rest=${rest% }
+    rest=$(normspace "$rest")
     rest=${rest#/ }
     printf '%s"%s" %s\n' "$sep" "$title" "$rest"
     printf '%s\n' "$url"
