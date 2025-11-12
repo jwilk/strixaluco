@@ -16,6 +16,13 @@ normspace()
 user_agent='Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:128.0) Gecko/20100101 Firefox/128.0'
 tmpfile=$(mktemp -t strixaluco.XXXXXX)
 sep=''
+if [ $# -eq 0 ] && ! [ -t 0 ]
+then
+    set -f
+    # shellcheck disable=SC2046
+    set -- $(cat)
+    set +f
+fi
 for url in "$@"
 do
     curl --silent --fail --show-error --location --user-agent "$user_agent" "$url" > "$tmpfile"
