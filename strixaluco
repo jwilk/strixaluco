@@ -24,7 +24,7 @@ then
 fi
 for url in "$@"
 do
-    html=$(curl --silent --fail --show-error --location --user-agent "$user_agent" "$url")
+    html=$(curl --silent --fail --show-error --location --user-agent "$user_agent" --referer "$url" "$url")
     title=$(pup '.desc-o-mb-title text{}' <<< "$html")
     title=$(normspace "$title")
     rest=$(pup '.desc-o-b-rest text{}' <<< "$html")
